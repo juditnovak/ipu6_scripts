@@ -4,6 +4,9 @@
 #                    + whatever's specified in the docs (libdrm-dev)
 #
 
+
+export IPU6_VER=ipu6ep
+
 # IPU6 drivers
 git clone https://github.com/intel/ipu6-drivers.git
 
@@ -22,8 +25,8 @@ git clone https://github.com/intel/ipu6-camera-bins.git
 
 # https://github.com/intel/ipu6-camera-bins#deployment
 # Note: Alder Lake
-sudo cp -r ipu6-camera-bins/ipu6ep/include/* /usr/include/
-sudo cp -r --remove-destination ipu6-camera-bins/ipu6ep/lib/* /usr/lib/
+sudo cp -r ipu6-camera-bins/${IPU6_VER}/include/* /usr/include/
+sudo cp -r ipu6-camera-bins/${IPU6_VER}/lib/* /usr/lib/
 
 # IPU6 camera HAL
 git clone https://github.com/intel/ipu6-camera-hal.git
@@ -33,7 +36,6 @@ cd ipu6-camera-hal
 # cd config/linux/ipu6ep
 # ffmpeg -i <input_file> -pix_fmt nv12 privacy_image_<sensor_name>-uf_<width>_<height>.yuv
 
-export IPU6_VER=ipu6ep
 mkdir -p ./build/out/install/usr && cd ./build/
 
 cmake -DCMAKE_BUILD_TYPE=Release \
